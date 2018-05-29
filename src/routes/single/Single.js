@@ -10,10 +10,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Home.css';
+import s from './Single.css';
 
-class Home extends React.Component {
+class Single extends React.Component {
   static propTypes = {
+    id: PropTypes.number.isRequired,
     news: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
@@ -24,27 +25,25 @@ class Home extends React.Component {
   };
 
   render() {
+    const article = this.props.news[this.props.id];
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <h1>Dodgers Digest</h1>
-          {this.props.news.map((item, ind) => (
-            /* original: <article key={item.link} className={s.newsItem}> */
-            <article key={item.link} className={s.newsItem}>
-              <h1 className={s.newsTitle}>
-                <a href={`/single/${ind}`}>{item.title}</a>
-              </h1>
-              <div
-                className={s.newsDesc}
-                // eslint-disable-next-line react/no-danger
-                dangerouslySetInnerHTML={{ __html: item.content }}
-              />
-            </article>
-          ))}
+          <h1>{article.title}</h1>
+          <article key={article.link} className={s.newsItem}>
+            <h1 className={s.newsTitle}>
+              <a href={article.link}>{article.title}</a>
+            </h1>
+            <div
+              className={s.newsDesc}
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{ __html: article.content }}
+            />
+          </article>
         </div>
       </div>
     );
   }
 }
 
-export default withStyles(s)(Home);
+export default withStyles(s)(Single);

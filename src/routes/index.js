@@ -36,14 +36,26 @@ const routes = {
       load: () => import(/* webpackChunkName: 'about' */ './about'),
     },
     {
+      path: '/bob',
+      load: () => import(/* webpackChunkName: 'bob' */ './bob'),
+    },
+    {
       path: '/privacy',
       load: () => import(/* webpackChunkName: 'privacy' */ './privacy'),
+    },
+    {
+      path: '/side-effects',
+      load: () =>
+        import(/* webpackChunkName: 'side-effects' */ './side-effects'),
     },
     {
       path: '/admin',
       load: () => import(/* webpackChunkName: 'admin' */ './admin'),
     },
-
+    {
+      path: '/single/:id',
+      load: () => import(/* webpackChunkName: 'single' */ './single'),
+    },
     // Wildcard routes, e.g. { path: '(.*)', ... } (must go last)
     {
       path: '(.*)',
